@@ -6,27 +6,15 @@
 
 <template name='main'>
   <div class='main'>
-  {{#if chantier}}
-    {{> chantier_template}}
+  {{#if menu_optimization}}
+    {{> optimization}}
+  {{else}}{{#if menu_settings}}
+    {{> settings}}
+  {{else}}{{#if menu_help}}
+    {{> help}}
   {{else}}
-    {{#if aide}}
-      aide
-    {{else}}
-      {{#if bdd}}
-        {{> db}}
-      {{else}}
-        {{#if membres}}
-          {{> membre}}
-        {{else}}
-          {{#if preferences}}
-            {{> preference}}
-          {{else}}
-            {{> chantiers}}
-          {{/if}}
-        {{/if}}
-      {{/if}}
-    {{/if}}
-  {{/if}}
+    {{> optimizations}}
+  {{/if}}{{/if}}{{/if}}
   </div>
 </template>
 
@@ -37,7 +25,7 @@
       <div class='home-logo'>
         Group Project
       </div>
-      <form id="login-form" class="form go-up">
+      <form id="login-form" class="form leave-down">
         <div>
           <p class="error-form" id="error-serveur">Error. Try again :S</p>
           <input type="email" id="login-email" placeholder="Email" />

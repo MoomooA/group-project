@@ -1,2 +1,2 @@
 Meteor.subscribe("optimizations")
-Meteor.subscribe("iterations")
+Meteor.subscribe("iterations", Session.get("optimization"))
