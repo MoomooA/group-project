@@ -1,7 +1,14 @@
 Meteor.publish("iterations", (optimizationId) ->
-  Iterations.find({optimizationId: optimizationId})
+  if @userId and optimizationId?
+    Iterations.find({optimizationId: optimizationId})
+  else
+    @ready()
+
 )
 
 Meteor.publish("optimizations", () ->
-  Optimizations.find({userId : this.userId})
+  if @userId
+    Optimizations.find({userId : @userId})
+  else
+    @ready()
 )

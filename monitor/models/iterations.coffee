@@ -14,6 +14,7 @@
   "_id": ObjectId,
   "D": number,
   "L": number,
+  "value": number,
   "parameters": [number]
   "optimizationId": ObjectId,
   "variation": ObjectId,

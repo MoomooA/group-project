@@ -1,3 +1,6 @@
 <template name="optimizations">
-  List optimizations
+  {{#each optimizations}}
+  <div class='optimization{{#if finished}} finished{{/if}}' id='{{_id}}'><div>{{prettifyDate updatedAt}}</div><div class='del-optimization' id='{{_id}}'><i class='icon icon-suppr' title = 'Delete the optimization'>x</i></div><div>{{max}}</div></div>
+  {{/each}}
+  <div class='addOptimization'><div>+</div><div>New Optimization</div></div>
 </template>

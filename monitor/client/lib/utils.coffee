@@ -14,9 +14,10 @@
 @utils.initButton = (t) ->
   button = t.find('.progress-button')
   classie.addClass(button, 'loading')
-  for el in t.find('.error-form')
-    do (el) ->
-      utils.hideErrorForm(el)
+  if t.find('.error-form')?
+    for el in t.find('.error-form')
+      do (el) ->
+        utils.hideErrorForm(el)
   return button
 
 @utils.showErrorForm = (el) ->

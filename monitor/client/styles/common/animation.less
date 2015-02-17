@@ -16,6 +16,15 @@
   .animation(right @time-factor*1290ms linear both);
 }
 
+@-webkit-keyframes spin {
+  from {-webkit-transform: rotate(0deg);-webkit-transform-origin: top left;}
+  to {-webkit-transform: rotate(360deg);-webkit-transform-origin: top left;}
+}
+@keyframes spin {
+  from {transform: rotate(0deg);transform-origin: top left;}
+  to {transform: rotate(360deg);transform-origin: top left;}
+}
+
 @keyframes down {
   0% {.translate(0,0)}
   99.99% {.translate(0,250%); opacity:1}

@@ -6,11 +6,11 @@ UI.registerHelper('prettifyDate', (date) ->
     now = new Date().getTime()
     diffEnJour = ((now - timestamp.getTime()) / 86400000).toFixed(0)
     if diffEnJour < 1
-      "Aujourd'hui"
+      "Today"
     else if diffEnJour < 2
-      "Hier"
+      "Yesterday"
     else if diffEnJour < 8
-      "Il y a " + diffEnJour + " jours."
+      "" + diffEnJour + " days ago"
     else
-      "Le " + timestamp.toLocaleDateString('fr')
+      "The " + timestamp.toLocaleDateString('en')
 )

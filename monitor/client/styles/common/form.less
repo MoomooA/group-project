@@ -16,11 +16,10 @@
     padding: 0.7em 1em;
     //.transition(all @time-factor*0.30s ease-in-out);
     outline: none;
-    border: 2px solid @primary-color;
+    border: 2px solid currentColor;
     border-radius: 0;
     background: transparent;
-    color: @primary-color;
-    box-shadow: 0px 0px 0px 0px @primary-color;
+    .shadow(none)
   }
 
   input[type="search"]:focus, input[type="email"]:focus, input[type="password"]:focus, input[type="text"]:focus, input[type="number"]:focus, textarea:focus {

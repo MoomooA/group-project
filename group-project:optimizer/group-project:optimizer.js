@@ -11,7 +11,7 @@ Optimizer = (function () {
     }
     this.tolerance = _tolerance || 0.01;
     this.currentParameters = _startingParameters;
-    this.tweekedParameter = this._findTweekedParameter(this.currentParameters, _previousParameters || _startingParameters);
+    this.tweakedParameter = this._findtweakedParameter(this.currentParameters, _previousParameters || _startingParameters);
     this.currentVariation = _currentVariation || Variation.Undefined;
     this.previousVariation = _previousVariation || Variation.Undefined;
     this.defaultStep = _step || 1;
@@ -23,7 +23,7 @@ Optimizer = (function () {
     return typeof parameters === "object" && parameters !== null && parameters.length && parameters.length !== 0;
   };
 
-  Optimizer.prototype._findTweekedParameter = function (currentParameters, previousParameters) {
+  Optimizer.prototype._findtweakedParameter = function (currentParameters, previousParameters) {
     for (var i = 0; i < currentParameters.length; i++) {
       if (currentParameters[i] !== previousParameters[i]) {
         return i;
@@ -37,22 +37,22 @@ Optimizer = (function () {
     var step = this.defaultStep;
     var variation = Variation.Plus;
 
-    var parameterToTweekIndex = this.tweekedParameter;
+    var parameterTotweakIndex = this.tweakedParameter;
 
     if (typeof currentValue === "undefined" || currentValue === null) {
       // we need the value
       return new Error("The value is missing.");
     }
 
-    if (this.tweekedParameter === -1) {
-      // if it's the first time, pick the first parameter and tweek it
-      parameterToTweekIndex = 0;
+    if (this.tweakedParameter === -1) {
+      // if it's the first time, pick the first parameter and tweak it
+      parameterTotweakIndex = 0;
     } else if (Math.abs(currentValue - this.previousValue) < this.tolerance) {
       // if we are under the tolerance for this parameter, go to the next one
-      parameterToTweekIndex = (this.tweekedParameter + 1) % this.currentParameters.length;
+      parameterTotweakIndex = (this.tweakedParameter + 1) % this.currentParameters.length;
     }
 
-    if (parameterToTweekIndex === this.tweekedParameter) {
+    if (parameterTotweakIndex === this.tweakedParameter) {
       step = this.step;
       if (currentValue < this.previousValue) { // we need to go back
         variation = -this.currentVariation;
@@ -67,11 +67,18 @@ Optimizer = (function () {
       }
     }
 
+    this.previousValue = currentValue;
     this.previousVariation = this.currentVariation;
     this.currentVariation = variation;
     this.step = step;
-    this.tweekedParameter = parameterToTweekIndex;
-    this.currentParameters[this.tweekedParameter] = this.currentParameters[this.tweekedParameter] + this.step * this.currentVariation;
+    this.tweakedParameter = parameterTotweakIndex;
+    this.currentParameters[this.tweakedParameter] = parseFloat(this.currentParameters[this.tweakedParameter]) + this.step * this.currentVariation;
+
+    // if we are tweaking the t, make sure that it's not under 0.01, it's a really thin airfoil already
+    // TODO find a way remove it from here
+    if (this.tweakedParameter === 0 && this.currentParameters[this.tweakedParameter] < 0.01) {
+      this.currentParameters[this.tweakedParameter] = 0.01;
+    }
 
     return {
       parameters : this.currentParameters,

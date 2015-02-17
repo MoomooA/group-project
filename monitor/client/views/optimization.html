@@ -1,3 +1,34 @@
 <template name="optimization">
-  optimization
+  {{#if newOptimization}}
+  {{> new_optimization}}
+  {{else}}
+
+    <div>Tolerance : {{currentOptimization.tolerance}}</div>
+    <div>Step : {{currentOptimization.defaultStep}}</div>
+    <div>Max : {{currentOptimization.max}}</div>
+    <div>Iterations : {{iterations.length}}</div>
+    {{#if currentOptimization.finished}}
+    finished !
+    {{else}}
+    <div class="progress-button form-button" id="iterate">
+      <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Iterate !</span>{{> svgButton}}</button>
+    </div>
+    {{/if}}
+  {{/if}}
+</template>
+
+<template name="new_optimization">
+  <form class="form go-up">
+    <div>
+      <p class="error-form" id="error-serveur">Error. Try again :S</p>
+      <input type="number" id="tolerance" placeholder="Tolerance" min="0" max="100"/>
+      <input type="number" id="step" placeholder="Default Step" min="0" max="100"/>
+      <input type="number" id="c" placeholder="Chord Length" min="0" max="100"/>
+      <input type="number" id="t" placeholder="Maximum Thickness as a Fraction of the Chord" min="0" max="100"/>
+      <input type="number" id="theta" placeholder="Angle of Attack (radian)" min="0" max="100"/>
+      <div class="progress-button form-button">
+        <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Go !</span>{{> svgButton}}</button>
+      </div>
+    </div>
+  </form>
 </template>

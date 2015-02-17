@@ -3,7 +3,7 @@ LiftSolver = (function () {
 
   LiftSolver.prototype.solve = function (c, t, theta, rho, v, L) {
     var A = L * c;
-    var C = 2 * Math.PI * theta;
+    var C = 2 * Math.PI * (theta % (2 * Math.PI));
     return 1 / 2 * C * rho * v * v * A;
   };
 

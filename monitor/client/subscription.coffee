@@ -1,2 +1,4 @@
 Meteor.subscribe("optimizations")
-Meteor.subscribe("iterations", Session.get("optimization"))
+
+Tracker.autorun () ->
+  Meteor.subscribe("iterations", Session.get("optimization"))
