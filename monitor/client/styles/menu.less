@@ -1,0 +1,78 @@
+@import "common/variables.less";
+
+.sidebar {
+  height: 100%;
+  -webkit-transform: translate3d(0px, 0px, 0px);
+  .transition;
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  border-right: 1px solid #e1e4e6;
+  border-left: 1px solid #e1e4e6;
+  position: absolute;
+  background: white;
+  left: 0;
+  top:0;
+  z-index:2;
+}
+
+.sidebar.hide-menu {
+  left: -311px;
+}
+
+.sidebar.hide-menu ~ .main {
+  padding-left: 0;
+}
+
+.sidebar ul {
+  width: 311px;
+  transition: all 0s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+  -webkit-transition: all 0s cubic-bezier(0.8, 0, 0.2, 1) 0s;
+  padding-left:0;
+}
+
+.sidebar ul>li {
+  width: 311px;
+  height: 60px;
+  border-bottom: 1px solid #e1e4e6;
+  overflow: hidden;
+  position: relative;
+}
+
+.sidebar ul>li.forbidden a {
+  color: @darkLightgray;
+  cursor: not-allowed;
+}
+
+.sidebar ul>li.forbidden a:hover {
+  background: @darkLightgray;
+  color: #FFFFFF;
+}
+
+.sidebar ul>li.menu-logo {
+  padding-left: 4.8em;
+}
+
+.sidebar ul>li a{
+  height: 100%;
+  padding: 1.067em 0;
+  padding-left: 4.8em;
+  display: block;
+  .transition;
+}
+
+.sidebar ul>li a:hover{
+  background: @darkMint;
+  color: #FFFFFF;
+  text-decoration: none;
+}
+
+input.search {
+  padding-left: 4.8em;
+  outline: none;
+  border: none;
+  background: transparent;
+  color: @darkMint;
+  height:60px;
+  cursor: text;
+}

@@ -1,0 +1,113 @@
+@import "common/variables.less";
+
+.background-gradient {
+  width: 100%;
+  height: 100%;
+  background: -webkit-linear-gradient(0deg, @mint, @darkMint); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(0deg, @mint, @darkMint); /* FF3.6+ */
+  background:     -ms-linear-gradient(0deg, @mint, @darkMint); /* IE10 */
+  background:      -o-linear-gradient(0deg, @mint, @darkMint); /* Opera 11.10+ */
+  background:         linear-gradient(0deg, @mint, @darkMint); /* W3C */
+}
+
+#login-form {
+  background: @lightgray;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 400px;
+  margin-top: -150px;
+  margin-left: -200px;
+  border-radius: 2px;
+}
+
+#login-form input, #login-form .form-button {
+  width: 380px;
+}
+
+.home-logo {
+  text-align: center;
+  padding-top: 25px;
+  position: absolute;
+  left: 50%;
+  margin-left: -160px;
+}
+
+#logo_circle {
+  stroke-dasharray: 566;
+  stroke-dashoffset: 566;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_eclair {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_p {
+  stroke-dasharray: 292;
+  stroke-dashoffset: 292;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_t1 {
+  stroke-dasharray: 146;
+  stroke-dashoffset: 146;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_t2 {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_e1 {
+  stroke-dasharray: 255;
+  stroke-dashoffset: 255;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_l {
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_e2 {
+  stroke-dasharray: 255;
+  stroke-dashoffset: 255;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+#logo_c {
+  stroke-dasharray: 189;
+  stroke-dashoffset: 189;
+  .animation(dash @time-factor*1s linear forwards);
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@-webkit-keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+.home-by {
+  position: absolute;
+  bottom: 10px;
+  right: 10px;
+  font-size: 10px;
+}
+
+#note {
+  margin-top: 10px;
+  margin-left: 15px;
+  margin-bottom: 10px;
+}

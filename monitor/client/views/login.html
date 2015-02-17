@@ -1,0 +1,22 @@
+<template name="login">
+  <div class='background-gradient'>
+    <div class='home-logo'>
+      Group Project
+    </div>
+    <form id="login-form" class="form go-up">
+      <div>
+        <p class="error-form" id="error-serveur">Error. Try again :S</p>
+        <input type="email" id="login-email" placeholder="Email" />
+        <p class="error-form" id="user-not-found">Not a good email.</p>
+        <input type="password" id="login-password" placeholder="Mot de passe" />
+        <p class="error-form" id="password-incorrect">Wrong password.</p>
+        <div class="progress-button form-button{{#if loggingIn}} loading{{/if}}">
+          <button type="submit" id="login-button" class="button button-border-primary button-jumbo"><span>Login</span>{{> svgButton}}</button>
+        </div>
+      </div>
+    </form>
+    <div class='home-by'>
+      <a class='inverse' href='#'>The group</a>
+    </div>
+  </div>
+</template>

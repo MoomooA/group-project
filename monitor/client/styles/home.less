@@ -1,0 +1,190 @@
+@import "common/variables.less";
+
+.curtain-gradient {
+  width: 50%;
+  height: 100%;
+  background: -webkit-linear-gradient(0deg, @mint, @darkMint); /* Chrome 10+, Saf5.1+ */
+  background:    -moz-linear-gradient(0deg, @mint, @darkMint); /* FF3.6+ */
+  background:     -ms-linear-gradient(0deg, @mint, @darkMint); /* IE10 */
+  background:      -o-linear-gradient(0deg, @mint, @darkMint); /* Opera 11.10+ */
+  background:         linear-gradient(0deg, @mint, @darkMint); /* W3C */
+  float: left;
+}
+
+.curtain {
+  height: 100%;
+  position: absolute;
+  z-index:9999;
+  top: 0;
+  width: 100%;
+  .animation(hide 0s linear @time-factor*1.3s forwards);
+}
+
+#logor_circle {
+  stroke-dasharray: 566;
+  stroke-dashoffset: 566;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_eclair {
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_p {
+  stroke-dasharray: 292;
+  stroke-dashoffset: 292;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_t1 {
+  stroke-dasharray: 146;
+  stroke-dashoffset: 146;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_t2 {
+  stroke-dasharray: 44;
+  stroke-dashoffset: 44;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_e1 {
+  stroke-dasharray: 255;
+  stroke-dashoffset: 255;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_l {
+  stroke-dasharray: 126;
+  stroke-dashoffset: 126;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_e2 {
+  stroke-dasharray: 255;
+  stroke-dashoffset: 255;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#logor_c {
+  stroke-dasharray: 189;
+  stroke-dashoffset: 189;
+  .animation(dash @time-factor*0.5s linear reverse);
+}
+
+#curtain1 {
+  .animation(leave-left @time-factor*0.3s linear @time-factor*0.7s forwards);
+}
+
+#curtain2 {
+  .animation(leave-right @time-factor*0.3s linear @time-factor*0.7s forwards);
+}
+
+@keyframes hide {
+  0% {.translate(0,0)}
+  99.999999% {.translate(0,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@-webkit-keyframes hide {
+  0% {.translate(0,0)}
+  99.999999% {.translate(0,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@keyframes leave-left {
+  0% {.translate(0,0)}
+  99.99% {.translate(-100%,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@-webkit-keyframes leave-left {
+  0% {.translate(0,0)}
+  99.99% {.translate(-100%,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@keyframes leave-right {
+  0% {.translate(0,0)}
+  99.99% {.translate(100%,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@-webkit-keyframes leave-right {
+  0% {.translate(0,0)}
+  99.99% {.translate(100%,0); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+.main {
+  position:absolute;
+  top:0;
+  height: 100%;
+  width: 100%;
+  overflow-y: auto;
+  left: 0;
+  z-index:1;
+  padding-left: 313px;
+  .transition;
+}
+
+.chantier, .addChantier {
+  width: 200px;
+  height: 200px;
+  margin-left: 20px;
+  margin-top: 20px;
+  background: @darkMint;
+  color: #FFFFFF;
+  float: left;
+  cursor: pointer;
+}
+
+.addChantier {
+  margin-bottom: 20px;
+}
+
+.addChantier > div {
+  width:100%;
+  text-align: center;
+}
+
+.addChantier > div:first-child {
+  font-size: 147px;
+}
+
+.chantier > div:first-child {
+  text-align: right;
+  position: relative;
+  padding-right: 10px;
+  top: 175px;
+}
+.chantier > div:last-child {
+  padding: 10px;
+  font-size: 30px;
+  text-align: center;
+  max-height: 160px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 200px;
+  margin-top: -20px;
+}
+
+.chantier > div.suppr-chantier {
+  opacity: 0;
+  .transition;
+  position: relative;
+  padding-right: 3px;
+  top: -3px;
+  text-align: right;
+}
+
+.chantier:hover > div.suppr-chantier {
+  opacity: 1;
+}
+
+.chantier:hover > div.suppr-chantier:hover {
+  color: @error-color;
+}
+

@@ -1,0 +1,120 @@
+@import "variables.less";
+
+*, *:before, *:after {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing:    border-box;
+    box-sizing:         border-box;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  background-color: @secondary-color;
+  color: @primary-color;
+  font-size: 22px;
+}
+
+.full-screen {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+}
+
+a {
+  text-decoration: none;
+  color: @primary-color;
+  cursor: pointer;
+}
+
+a:active, a:hover {
+  text-decoration: underline;
+}
+
+.inverse {
+  color: @secondary-color;
+}
+
+.hide {
+  display: none !important;
+}
+
+.go-up {
+  .animation(up @time-factor*1290ms linear both);
+}
+
+.leave-down {
+  .animation(down @time-factor*500ms linear forwards);
+}
+
+.go-left {
+  .animation(left @time-factor*1290ms linear both);
+}
+
+.go-right {
+  .animation(right @time-factor*1290ms linear both);
+}
+
+.go-left-bis {
+  .animation(leftBis @time-factor*1290ms linear both);
+}
+
+.go-right-bis {
+  .animation(rightBis @time-factor*1290ms linear both);
+}
+
+hr {
+  clear: both;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  border: 0px solid @primary-color;
+  border-bottom: 1px solid #e1e4e6;
+}
+
+.loader {
+  width: 96vw;
+  max-width: 24*20px;
+  margin: 0 auto;
+  margin-top: ~'calc(50vh - 100px)';
+  .point {
+    width: 4vw;
+    height: 4vw;
+    max-width: 20px;
+    max-height: 20px;
+    background-color: @primary-color;
+    float: left;
+    border-radius: 50%;
+
+    animation-name: loading;
+    animation-delay: -500ms;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+    -webkit-animation-name: loading;
+    -webkit-animation-delay: -500ms;
+    -webkit-animation-timing-function: linear;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-direction: alternate;
+  }
+
+  .generate-delays(24);
+
+  .generate-delays(@n, @i: 1) when (@i =< @n) {
+    .point:nth-child(@{i}) {
+      opacity: (1-4*(@n/2 - @i)*(@n/2 - @i)/(@n*@n));
+      animation-duration: 24/(24+ @n - @i) * 700ms;
+      -webkit-animation-duration: 24/(24+ @n - @i) * 700ms;
+    }
+    .generate-delays(@n, (@i + 1));
+  }
+}
+
+@keyframes loading {
+  0% {transform:translate(0, 0);}
+  100% {transform:translate(0, 200px);}
+}
+
+@-webkit-keyframes loading {
+  0% {-webkit-transform:translate(0, 0);}
+  100% {-webkit-transform:translate(0, 200px);}
+}
