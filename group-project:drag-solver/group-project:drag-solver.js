@@ -4,8 +4,8 @@ DragSolver = (function () {
   }
 
   DragSolver.prototype.solve = function (c, t, theta, C, rho, v, L) {
-    // TODO find A
-    var A = L * c;
+    // 1.1019 * t * t is the radius at the front of the airfoil. I'm approximating the length of what is not on the regular triangle by it
+    var A = L * Math.cos(theta) * c + 1.1019 * t * t;
     return 1 / 2 * C * rho * v * v * A;
   };
 
