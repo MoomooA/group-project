@@ -2,10 +2,8 @@
 ========
 
 
-
-# Distributed System for Monitoring a Workflow Process
-
 ```
+Description: Distributed System for Monitoring a Workflow Process
 Authors: Mathieu Dutour, Jakub Baron, Leo Raimondjean, Miguel Martínez
 Version: v0.1 Feb 2015
 ```
@@ -22,10 +20,10 @@ This project contains:
 
 ### DEPENDENCIES:
 
-1. SSH2 for Authentication package
++ SSH2 for Authentication package
 
 
 ### TECHNOLOGY:
 
-1. Node JS + Meteor
++ Node JS + Meteor
 
