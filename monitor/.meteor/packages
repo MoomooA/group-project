@@ -12,3 +12,4 @@ coffeescript
 less
 accounts-base
 accounts-password
+group-project:authentication

@@ -17,6 +17,7 @@ email@1.0.5
 fastclick@1.0.2
 follower-livedata@1.0.3
 geojson-utils@1.0.2
+group-project:authentication@0.0.1
 group-project:drag-solver@0.0.1
 group-project:lift-solver@0.0.1
 group-project:optimizer@0.0.1
