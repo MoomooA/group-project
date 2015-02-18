@@ -4,13 +4,13 @@ Template.optimization.helpers
   currentOptimization: () ->
     Optimizations.findOne(Session.get('optimization'))
   iterations: () ->
-    Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["updatedAt", "desc"]]}).fetch()
+    Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).fetch()
   currentIteration: () ->
     optimization = Optimizations.findOne(Session.get('optimization'))
     if optimization? and optimization.finished
       Iterations.findOne({$and: [{optimizationId: optimization._id}, {value: optimization.max}]})
     else
-      Iterations.findOne({optimizationId: optimization._id}, {sort:[["updatedAt", "desc"]]})
+      Iterations.findOne({optimizationId: optimization._id}, {sort:[["counter", "desc"]]})
 
       ### TODO update canvas
 Tracker.autorun () ->
@@ -19,7 +19,7 @@ Tracker.autorun () ->
   if optimization? and optimization.finished
     iteration = Iterations.findOne({$and: [{optimizationId: optimization._id}, {value: optimization.max}]})
   else
-    iteration = Iterations.findOne({optimizationId: optimization._id}, {$sort:[["updatedAt", "desc"]]})
+    iteration = Iterations.findOne({optimizationId: optimization._id}, {$sort:[["counter", "desc"]]})
       ###
 
 Template.new_optimization.events

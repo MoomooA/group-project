@@ -16,6 +16,7 @@ Meteor.methods
       step: null
       optimizationId: optimizationId
       timestamp: new Date()
+      counter: 0
     Optimizations.update(optimizationId, {$set: {max: L/D, updatedAt: new Date()}})
 
   optimize: (optimizationId, nbIterations) ->
@@ -24,7 +25,8 @@ Meteor.methods
     dragSolver = new DragSolver(1)
     liftSolver = new LiftSolver()
     optimization = Optimizations.findOne(optimizationId)
-    iterations = Iterations.find({optimizationId: optimizationId}, {sort:[["updatedAt", "desc"]], limit: 2}).fetch()
+    nbIt = Iterations.find({optimizationId: optimizationId}).count()
+    iterations = Iterations.find({optimizationId: optimizationId}, {sort:[["counter", "desc"]], limit: 2}).fetch()
     optimizer = null
     c = null
 
@@ -66,6 +68,7 @@ Meteor.methods
         step: step
         optimizationId: optimizationId
         timestamp: new Date()
+        counter: nbIt + i
 
       i++
 
