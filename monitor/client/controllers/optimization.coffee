@@ -41,6 +41,9 @@ drawGraph = () ->
       plotBackgroundColor: null,
       plotBorderWidth: null,
       plotShadow: false
+    plotOptions:
+      series:
+        color: '#37BC9B'
     title:
       text: null
     yAxis:
