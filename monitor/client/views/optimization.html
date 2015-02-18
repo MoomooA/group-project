@@ -2,18 +2,34 @@
   {{#if newOptimization}}
   {{> new_optimization}}
   {{else}}
+    <div class="container">
+      <div class="dashboard">
+        <div class="side">
+          <h3>Globals parameters</h3>
+          <div><span>Tolerance</span> {{currentOptimization.tolerance}}</div>
+          <div><span>Step</span> {{currentOptimization.defaultStep}}</div>
+          <div><span>L / D max</span> {{currentOptimization.max}}</div>
+          <div><span>Iterations</span> {{iterations.length}}</div>
+        </div>
+        <div class="side">
+          <h3>{{#if currentOptimization.finished}}Best Iteration{{else}}Current Iteration{{/if}}</h3>
+          <div><span>c</span> {{currentIteration.parameters.[0]}}</div>
+          <div><span>t</span> {{currentIteration.parameters.[1]}}</div>
+          <div><span>theta</span> {{currentIteration.parameters.[2]}}</div>
+          <div><span>L / D</span> {{currentIteration.value}}</div>
+        </div>
 
-    <div>Tolerance : {{currentOptimization.tolerance}}</div>
-    <div>Step : {{currentOptimization.defaultStep}}</div>
-    <div>Max : {{currentOptimization.max}}</div>
-    <div>Iterations : {{iterations.length}}</div>
-    {{#if currentOptimization.finished}}
-    finished !
-    {{else}}
-    <div class="progress-button form-button" id="iterate">
-      <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Iterate !</span>{{> svgButton}}</button>
+        {{#if currentOptimization.finished}}{{else}}
+        <div class="progress-button form-button" id="iterate">
+          <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Iterate !</span>{{> svgButton}}</button>
+        </div>
+        {{/if}}
+      </div>
+      <div class="wrapper">
+        <div class="draw"><canvas id="canvas-draw"></canvas></div>
+        <div class="graph"></div>
+      </div>
     </div>
-    {{/if}}
   {{/if}}
 </template>
 
@@ -21,11 +37,11 @@
   <form class="form go-up">
     <div>
       <p class="error-form" id="error-serveur">Error. Try again :S</p>
-      <input type="number" id="tolerance" placeholder="Tolerance" min="0" max="100"/>
-      <input type="number" id="step" placeholder="Default Step" min="0" max="100"/>
-      <input type="number" id="c" placeholder="Chord Length" min="0" max="100"/>
-      <input type="number" id="t" placeholder="Maximum Thickness as a Fraction of the Chord" min="0" max="100"/>
-      <input type="number" id="theta" placeholder="Angle of Attack (radian)" min="0" max="100"/>
+      <input type="number" step="any" id="tolerance" placeholder="Tolerance" min="0" max="100"/>
+      <input type="number" step="any" id="step" placeholder="Default Step" min="0" max="100"/>
+      <input type="number" step="any" id="c" placeholder="Chord Length" min="0" max="100"/>
+      <input type="number" step="any" id="t" placeholder="Maximum Thickness as a Fraction of the Chord" min="0" max="100"/>
+      <input type="number" step="any" id="theta" placeholder="Angle of Attack (radian)" min="0" max="100"/>
       <div class="progress-button form-button">
         <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Go !</span>{{> svgButton}}</button>
       </div>
