@@ -12,7 +12,9 @@ Template.optimization.helpers
     else
       Iterations.findOne({optimizationId: optimization._id}, {sort:[["counter", "desc"]]})
 
-      ### TODO update canvas
+graph = null
+
+### TODO update canvas
 Tracker.autorun () ->
   optimization = Optimizations.findOne(Session.get('optimization'))
   iteration = null
@@ -20,7 +22,42 @@ Tracker.autorun () ->
     iteration = Iterations.findOne({$and: [{optimizationId: optimization._id}, {value: optimization.max}]})
   else
     iteration = Iterations.findOne({optimizationId: optimization._id}, {$sort:[["counter", "desc"]]})
-      ###
+###
+
+###Tracker.autorun () ->
+  if graph?
+    console.log Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value])
+    graph.setData(Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value]))
+    graph.draw()
+
+Template.graph.rendered = () ->
+  graph = $.plot($(".graph"), Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value]))
+###
+
+drawGraph = () ->
+  values =  Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "asc"]]}).map((iteration) -> return if isNaN(iteration.value) then 0 else iteration.value)
+  $('#canvas-graph').highcharts
+    chart:
+      plotBackgroundColor: null,
+      plotBorderWidth: null,
+      plotShadow: false
+    title:
+      text: null
+    yAxis:
+      title: 'L / D'
+    credits:
+      enabled: false
+    legend:
+      enabled: false
+    series: [
+      name: 'L / D',
+      data: values
+    ]
+
+Template.graph.rendered =  () ->
+  @autorun () ->
+    drawGraph()
+
 
 Template.new_optimization.events
   'submit .form': (e, t) ->
@@ -69,7 +106,7 @@ Template.optimization.events
     e.preventDefault()
     button = utils.initButton t
 
-    nbIterations = 1000
+    nbIterations = 100
 
     Meteor.call('optimize', Session.get('optimization'), nbIterations, (err, result) ->
       classie.removeClass(button, 'loading')

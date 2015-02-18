@@ -52,7 +52,7 @@ Meteor.methods
     else
       parameters0 = iterations[0].parameters
       c = parameters0.shift() # we don't tweak the c
-      parameters1 = iterations[0].parameters
+      parameters1 = iterations[1].parameters
       parameters1.shift() # we don't tweak the c
       optimizer = new Optimizer(parameters0, optimization.tolerance, optimization.defaultStep, parameters1, iterations[0].variation, iterations[1].variation, iterations[0].step, iterations[1].L / iterations[1].D)
 
