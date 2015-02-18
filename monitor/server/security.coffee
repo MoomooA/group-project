@@ -1,4 +1,15 @@
 Meteor.methods
+  checkAstral: (username, password) ->
+    (new Auth()).authenticate(username, password, (err, result) ->
+      if err?
+        throw new Meteor.Error("error", err);
+      if !result
+        throw new Meteor.Error("error", "not-logged-in");
+      return Accounts.createUser
+        username: username
+        password: password
+    )
+
   deleteOptimization: (optimizationId) ->
     Optimizations.remove(optimizationId)
     Iterations.remove({optimizationId: optimizationId})

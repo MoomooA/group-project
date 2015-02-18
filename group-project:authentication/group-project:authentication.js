@@ -5,12 +5,12 @@ Auth = (function () {
     var Client = Npm.require('ssh2').Client,
         conn = new Client();
 
-    conn.on('ready', function () {
+    conn.on('ready', Meteor.bindEnvironment(function () {
       callback(null, true);
-    });
-    conn.on('error', function (e) {
+    }));
+    conn.on('error', Meteor.bindEnvironment(function (e) {
       callback(e);
-    });
+    }));
     conn.on('keyboard-interactive', function (name, instructions, instructionsLang, prompts, finish) {
       finish([password]);
     });
