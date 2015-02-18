@@ -14,22 +14,23 @@ Template.login.events
               console.log(err)
               utils.showErrorForm t.find('#error-serveur')
             else
-              Meteor.loginWithPassword(username, password, (err)->
-                classie.removeClass(button, 'loading')
-                if err?
-                  classie.addClass(button, 'error')
-                  setTimeout(
-                    () -> classie.removeClass(button, 'error' )
-                  , 1200 )
-                  console.log(err)
-                else
-                  classie.addClass(button, 'success')
-                  setTimeout(
-                    () -> classie.removeClass(button, 'success' )
-                  , 1200 )
-              )
+              Meteor.setTimeout( () ->
+                Meteor.loginWithPassword(username, password, (err)->
+                  classie.removeClass(button, 'loading')
+                  if err?
+                    classie.addClass(button, 'error')
+                    setTimeout(
+                      () -> classie.removeClass(button, 'error' )
+                    , 1200 )
+                    console.log(err)
+                  else
+                    classie.addClass(button, 'success')
+                    setTimeout(
+                      () -> classie.removeClass(button, 'success' )
+                    , 1200 )
+                )
+              , 500)
           )
-          utils.showErrorForm t.find('#user-not-found')
         else
           classie.removeClass(button, 'loading')
           classie.addClass(button, 'error')
