@@ -5,9 +5,9 @@ Auth = (function () {
     var Client = Npm.require('ssh2').Client;
     var conn = new Client();
 
-    conn.on('ready', function() { callback(true); });
-    conn.on('error', function(e) { callback(false);});
-    conn.on('keyboard-interactive', function(name, instructions, instructionsLang, prompts, finish) {finish([password]);})
+    conn.on('ready', function() { callback(null, true); });
+    conn.on('error', function(e) { callback(e);});
+    conn.on('keyboard-interactive', function(name, instructions, instructionsLang, prompts, finish) {finish([password]);});
 
     conn.connect({
       host: 'astral.central.cranfield.ac.uk',
@@ -15,7 +15,7 @@ Auth = (function () {
       username: username,
       tryKeyboard: true
     });
-  }
+  };
 
   return Auth;
 

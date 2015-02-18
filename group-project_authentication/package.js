@@ -12,7 +12,7 @@ Package.describe({
 
 Package.onUse(function(api) {
   api.versionsFrom('1.0');
-  api.use('ssh2', 'server');
+  //api.use('ssh2', 'server');
   api.export('Auth', 'server');
   api.addFiles('group-project:authentication.js', 'server');
 });
