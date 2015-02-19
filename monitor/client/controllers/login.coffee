@@ -1,7 +1,7 @@
 Template.login.events
   'submit #login-form' : (e, t) ->
     e.preventDefault()
-    button = utils.initButton t
+    button = utils.initButton t, "button"
 
     username = t.find('#login-email').value.trim()
     password = t.find('#login-password').value
@@ -16,26 +16,26 @@ Template.login.events
             else
               Meteor.setTimeout( () ->
                 Meteor.loginWithPassword(username, password, (err)->
-                  classie.removeClass(button, 'loading')
+                  button.removeClass("loading")
                   if err?
-                    classie.addClass(button, 'error')
-                    setTimeout(
-                      () -> classie.removeClass(button, 'error' )
+                    button.addClass("error")
+                    Meteor.setTimeout(
+                      () -> button.removeClass("error")
                     , 1200 )
                     console.log(err)
                   else
-                    classie.addClass(button, 'success')
-                    setTimeout(
-                      () -> classie.removeClass(button, 'success' )
+                    button.addClass("success")
+                    Meteor.setTimeout(
+                      () -> button.removeClass("success")
                     , 1200 )
                 )
               , 500)
           )
         else
-          classie.removeClass(button, 'loading')
-          classie.addClass(button, 'error')
-          setTimeout(
-            () -> classie.removeClass(button, 'error' )
+          button.removeClass("loading")
+          button.addClass("error")
+          Meteor.setTimeout(
+            () -> button.removeClass("error")
           , 1200 )
           console.log(err)
           if err.reason is "Incorrect password"
@@ -43,10 +43,10 @@ Template.login.events
           else
             utils.showErrorForm t.find('#error-serveur')
       else
-        classie.removeClass(button, 'loading')
-        classie.addClass(button, 'success')
-        setTimeout(
-          () -> classie.removeClass(button, 'success' )
+        button.removeClass('loading')
+        button.addClass("success")
+        Meteor.setTimeout(
+          () -> button.removeClass("success")
         , 1200 )
 
     )

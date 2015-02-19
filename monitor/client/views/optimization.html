@@ -21,9 +21,9 @@
           </div>
 
           {{#if currentOptimization.finished}}{{else}}
-          <div class="progress-button form-button" id="iterate">
-            <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Iterate !</span>{{> svgButton}}</button>
-          </div>
+            {{#progress_button id="iterate"}}
+              Iterate
+            {{/progress_button}}
           {{/if}}
           <div class="clearfix"></div>
         </div>
@@ -49,8 +49,10 @@
       <input type="number" step="any" id="c" placeholder="Chord Length" min="0" max="100"/>
       <input type="number" step="any" id="t" placeholder="Maximum Thickness as a Fraction of the Chord" min="0" max="100"/>
       <input type="number" step="any" id="theta" placeholder="Angle of Attack (radian)" min="0" max="100"/>
-      <div class="progress-button form-button">
-        <button type="submit" id="button" class="button button-border-primary button-jumbo"><span>Go !</span>{{> svgButton}}</button>
+      <div class="form-button">
+        {{#progress_button class="inverted" id="button" type="submit"}}
+            Go !
+        {{/progress_button}}
       </div>
     </div>
   </form>

@@ -24,40 +24,62 @@ Tracker.autorun () ->
     iteration = Iterations.findOne({optimizationId: optimization._id}, {$sort:[["counter", "desc"]]})
 ###
 
-###Tracker.autorun () ->
-  if graph?
-    console.log Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value])
-    graph.setData(Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value]))
-    graph.draw()
-
-Template.graph.rendered = () ->
-  graph = $.plot($(".graph"), Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]}).map((iteration) -> return [iteration.counter, iteration.value]))
-###
-
 drawGraph = () ->
-  values =  Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "asc"]]}).map((iteration) -> return if isNaN(iteration.value) then 0 else iteration.value)
+  iterations = Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "asc"]]})
+  values =  iterations.map (iteration) ->
+    return if isNaN(iteration.value) then 0 else parseFloat(iteration.value)
+  cValues =  iterations.map (iteration) ->
+    return {
+      y: parseFloat(iteration.parameters[0])
+      marker:
+        enabled: false
+        states:
+          hover:
+            enabled: false
+    }
+  tValues =  iterations.map (iteration) ->
+    return {
+      y: parseFloat(iteration.parameters[1])
+      marker:
+        enabled: false
+        states:
+          hover:
+            enabled: false
+    }
+  thetaValues =  iterations.map (iteration) ->
+    return {
+      y: parseFloat(iteration.parameters[2])
+      marker:
+        enabled: false
+        states:
+          hover:
+            enabled: false
+    }
   $('#canvas-graph').highcharts
     chart:
       plotBackgroundColor: null,
       plotBorderWidth: null,
       plotShadow: false
-    plotOptions:
-      series:
-        color: '#37BC9B'
     title:
       text: null
     yAxis:
       title: 'L / D'
+      min: 0
     credits:
       enabled: false
     legend:
       enabled: false
+    tooltip:
+      shared: true
     series: [
-      name: 'L / D',
-      data: values
+      {name: 'L / D', data: values, color: '#37BC9B'},
+      {name: 'c', data: cValues, color: '#FFF'},
+      {name: 't', data: tValues, color: '#FFF'},
+      {name: 'theta', data: thetaValues, color: '#FFF'}
     ]
 
 Template.graph.rendered =  () ->
+  $("#canvas-graph").height($(window).height() - $("#canvas-graph").offset().top)
   @autorun () ->
     drawGraph()
 
@@ -65,7 +87,7 @@ Template.graph.rendered =  () ->
 Template.new_optimization.events
   'submit .form': (e, t) ->
     e.preventDefault()
-    button = utils.initButton t
+    button = utils.initButton t, "button"
 
     tolerance = t.find('#tolerance').value.trim()
     step = t.find('#step').value.trim()
@@ -83,19 +105,19 @@ Template.new_optimization.events
       max: 0
     , (err, optimizationId) ->
       if err?
-        classie.removeClass(button, 'loading')
-        classie.addClass(button, 'error')
-        setTimeout(
-          () -> classie.removeClass(button, 'error' )
+        button.removeClass('loading')
+        button.addClass('error')
+        Meteor.setTimeout(
+          () -> button.removeClass('error' )
         , 1200 )
         console.log(err)
         return
       Meteor.call('launchOptimization', optimizationId, c, _t, theta, (err, result) ->
-        classie.removeClass(button, 'loading')
+        button.removeClass('loading')
         if err?
-          classie.addClass(button, 'error')
-          setTimeout(
-            () -> classie.removeClass(button, 'error' )
+          button.addClass('error')
+          Meteor.setTimeout(
+            () -> button.removeClass( 'error' )
           , 1200 )
           console.log(err)
           return
@@ -107,16 +129,16 @@ Template.new_optimization.events
 Template.optimization.events
   'click #iterate': (e, t) ->
     e.preventDefault()
-    button = utils.initButton t
+    button = utils.initButton t, "iterate"
 
-    nbIterations = 100
+    nbIterations = 10
 
     Meteor.call('optimize', Session.get('optimization'), nbIterations, (err, result) ->
-      classie.removeClass(button, 'loading')
+      button.removeClass('loading')
       if err?
-        classie.addClass(button, 'error')
+        button.addClass( 'error')
         setTimeout(
-          () -> classie.removeClass(button, 'error' )
+          () -> button.removeClass( 'error' )
         , 1200 )
         console.log(err)
         return

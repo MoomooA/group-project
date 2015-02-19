@@ -32,9 +32,9 @@
           <p class="error-form" id="user-not-found">Not a good email.</p>
           <input type="password" id="login-password" placeholder="Mot de passe" />
           <p class="error-form" id="password-incorrect">Wrong password.</p>
-          <div class="progress-button form-button{{#if loggingIn}} loading{{/if}}">
-            <button type="submit" id="login-button" class="button button-border-primary button-jumbo"><span>Login</span>{{> svgButton}}</button>
-          </div>
+          {{#progress_button id="button"}}
+            Login
+          {{/progress_button}}
         </div>
       </form>
       <div class='home-by'>
