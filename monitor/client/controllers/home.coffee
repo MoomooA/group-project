@@ -1,3 +1,6 @@
+UI.body.rendered = () ->
+  new OutdatedBrowser()
+
 Template.main.helpers
   menu_settings: () ->
     Session.get('page') is 'settings'

@@ -33,6 +33,7 @@ livedata@1.0.12
 localstorage@1.0.2
 logging@1.0.6
 maazalik:highcharts@0.2.3
+matdutour:outdated-browser@0.1.1
 matdutour:popup-confirm@0.1.22
 matdutour:progress-button@0.1.6
 meteor@1.1.4
