@@ -27,30 +27,30 @@ This project contains:
 
 + Node JS + Meteor
 
-### Installation
+### INSTALLATION
 
-1. Install Meteor
+###### 1 - Install Meteor
 
-```
-curl https://install.meteor.com/ | sh
-```
+  ```
+  curl https://install.meteor.com/ | sh
+  ```
 
-2. Symlink the packages
+###### 2 - Symlink the packages
 
-```
-cd group-project/
+  ```
+  cd group-project/
 
-ln -s /absolute/path/to/group-project:authentication monito/packages/group-project:authentication
-ln -s /absolute/path/to/group-project:drag-solver monito/packages/group-project:drag-solver
-ln -s /absolute/path/to/group-project:lift-solver monito/packages/group-project:lift-solver
-ln -s /absolute/path/to/group-project:optimizer monito/packages/group-project:optimizer
-```
+  ln -s /absolute/path/to/group-project:authentication monito/packages/group-project:authentication
+  ln -s /absolute/path/to/group-project:drag-solver monito/packages/group-project:drag-solver
+  ln -s /absolute/path/to/group-project:lift-solver monito/packages/group-project:lift-solver
+  ln -s /absolute/path/to/group-project:optimizer monito/packages/group-project:optimizer
+  ```
 
-3. Run Meteor
+###### 3 - Run Meteor
 
-```
-cd monitor/
+  ```
+  cd monitor/
 
-meteor
-```
+  meteor
+  ```
 
