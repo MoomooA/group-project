@@ -5,3 +5,4 @@
 /node_modules/
 
 monitor/packages/*
+!monitor/packages/README.md
