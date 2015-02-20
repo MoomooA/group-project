@@ -14,22 +14,20 @@ Template.login.events
               console.log('err-on-astral', err)
               utils.showErrorForm t.find('#error-serveur')
             else
-              Meteor.setTimeout( () ->
-                Meteor.loginWithPassword(username, password, (err)->
-                  button.removeClass("loading")
-                  if err?
-                    button.addClass("error")
-                    Meteor.setTimeout(
-                      () -> button.removeClass("error")
-                    , 1200 )
-                    console.log(err)
-                  else
-                    button.addClass("success")
-                    Meteor.setTimeout(
-                      () -> button.removeClass("success")
-                    , 1200 )
-                )
-              , 500)
+              Meteor.loginWithPassword(username, password, (err)->
+                button.removeClass("loading")
+                if err?
+                  button.addClass("error")
+                  Meteor.setTimeout(
+                    () -> button.removeClass("error")
+                  , 1200 )
+                  console.log(err)
+                else
+                  button.addClass("success")
+                  Meteor.setTimeout(
+                    () -> button.removeClass("success")
+                  , 1200 )
+              )
           )
         else
           button.removeClass("loading")

@@ -1,0 +1,31 @@
+@import "common/variables.less";
+
+.log {
+  padding: 0.3em 1em;
+  border-bottom: 1px solid @darkLightgray;
+
+  &:last-child {
+    border-bottom: 0px solid @darkLightgray;
+  }
+
+  .timestamp {
+    font-size: 0.7em;
+    color: @darkMediumgray;
+
+    &.error {
+      color: @error-color;
+    }
+
+    &.security {
+      color: @caution-color;
+    }
+
+    &.connection, &.disconnection {
+      color: @royal-color;
+    }
+  }
+
+  .message {
+    color: @darkDarkgray;
+  }
+}

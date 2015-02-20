@@ -12,9 +12,11 @@
     {{> settings}}
   {{else}}{{#if menu_help}}
     {{> help}}
+  {{else}}{{#if menu_logs}}
+    {{> logs}}
   {{else}}
     {{> optimizations}}
-  {{/if}}{{/if}}{{/if}}
+  {{/if}}{{/if}}{{/if}}{{/if}}
   </div>
 </template>
 

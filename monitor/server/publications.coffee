@@ -12,3 +12,10 @@ Meteor.publish("optimizations", () ->
   else
     @ready()
 )
+
+Meteor.publish("logs", () ->
+  if @userId
+    Logs.find({userId : @userId}, {limit: 100, sort: [["timestamp", "desc"]]})
+  else
+    @ready()
+)

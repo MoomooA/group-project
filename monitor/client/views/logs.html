@@ -1,0 +1,7 @@
+<template name="logs">
+  {{#each logs}}
+  <div class="log">
+    <span class="timestamp {{type}}">{{timestamp}}</span> : <span class="message">{{message}}</span>
+  </div>
+  {{/each}}
+</template>
