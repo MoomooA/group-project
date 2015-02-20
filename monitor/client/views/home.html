@@ -24,23 +24,23 @@
   <div class='curtain'>
     <div id='curtain1' class='curtain-gradient'></div>
     <div id='curtain2' class='curtain-gradient'></div>
-      <div class='home-logo'>
-        Group Project
-      </div>
-      <form id="login-form" class="form leave-down">
-        <div>
-          <p class="error-form" id="error-serveur">Error. Try again :S</p>
-          <input type="email" id="login-email" placeholder="Email" />
-          <p class="error-form" id="user-not-found">Not a good email.</p>
-          <input type="password" id="login-password" placeholder="Mot de passe" />
-          <p class="error-form" id="password-incorrect">Wrong password.</p>
-          {{#progress_button id="button"}}
-            Login
-          {{/progress_button}}
+    <div class='home-logo leave-up'>
+      Symetrical NACA<br />
+      Airfoil Optimization
+    </div>
+    <div class="form leave-down login-form">
+      <div>
+        <input type="email" id="login-email" placeholder="Email" />
+        <input type="password" id="login-password" placeholder="Mot de passe" />
+        <div class="form-button">
+        {{#progress_button id="button" class="inverted"}}
+          Login
+        {{/progress_button}}
         </div>
-      </form>
-      <div class='home-by'>
-        <a class='inverse' href='#'>The group</a>
       </div>
+    </div>
+    <div class='home-by'>
+      <a class='inverse' href='#'>The group</a>
+    </div>
   </div>
 </template>

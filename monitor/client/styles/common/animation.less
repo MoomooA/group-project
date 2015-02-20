@@ -8,6 +8,10 @@
   .animation(down @time-factor*500ms linear forwards);
 }
 
+.leave-up {
+  .animation(leave-up @time-factor*500ms linear forwards);
+}
+
 .go-left {
   .animation(left @time-factor*1290ms linear both);
 }
@@ -23,6 +27,18 @@
 @keyframes spin {
   from {transform: rotate(0deg);transform-origin: top left;}
   to {transform: rotate(360deg);transform-origin: top left;}
+}
+
+@keyframes leave-up {
+  0% {.translate(0,0)}
+  99.99% {.translate(0,-250%); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
+}
+
+@-webkit-keyframes leave-up {
+  0% {.translate(0,0)}
+  99.99% {.translate(0,-250%); opacity:1}
+  100% {.translate(-300%,0);opacity:0}
 }
 
 @keyframes down {
