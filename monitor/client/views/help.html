@@ -1,3 +1,20 @@
 <template name="help">
-  help
+    <div class="help-wrapper">
+        <div class="help-title">
+            <h1>Need Help?</h1>
+        </div>
+        <div class="help-list">
+                {{#each instructions}}
+                    <h4>{{instruction}}</h4>
+                    <p>{{value}}</p>
+                    {{#if images}}
+                        {{#each images}}
+                            <img src="{{image}}" id="{{id}}" width="300px" />
+                        {{/each}}
+                        <div id="clearfix"></div>
+                    {{/if}}
+                {{/each}}
+         </div>
+    </div>
+    
 </template>
