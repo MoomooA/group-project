@@ -2,16 +2,7 @@ Template.help.helpers instructions: [
   {
     instruction: 'How do I run a simulation?'
     value: 'Head over to the \'Optimizations\' tab and select \'New Optimization\'. Fill some initial parameters and you\'re ready to go!'
-    images: [
-      {
-        image: 'images/new_optimization.jpg'
-        id: 'pullLeft'
-      }
-      {
-        image: 'images/optimization_input.jpg'
-        id: 'pullRight'
-      }
-    ]
+    images: ['images/new_optimization.jpg','images/optimization_input.jpg']
   }
   {
     instruction: 'How will I know what happens during the simulation?'
