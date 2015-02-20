@@ -6,8 +6,10 @@ Meteor.methods
     (new Auth()).authenticate(username, password, (err, result) ->
       if err?
         future.throw(new Meteor.Error("error", err))
+        return
       if !result
         future.throw(new Meteor.Error("error", "Wrong ID or password"))
+        return
       id = Accounts.createUser
         username: username
         password: password
