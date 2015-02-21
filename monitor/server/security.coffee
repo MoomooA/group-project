@@ -42,6 +42,11 @@ Meteor.methods
       timestamp: new Date()
     Optimizations.remove(optimizationId)
     Iterations.remove({optimizationId: optimizationId})
+  
+  deleteAllOptimizations: ->
+    Optimizations.find({userId: @userId}).forEach((optimization) ->
+      Meteor.call 'deleteOptimization', optimization._id
+    )
 
   launchOptimization: (optimizationId, c, t, theta) ->
     optimization = Optimizations.findOne(optimizationId)
@@ -167,6 +172,11 @@ Meteor.methods
       Optimizations.update(optimizationId, {$set: {finished: true}})
 
     return "finished"
+
+deleteAllOptimizations: ->
+    Optimizations.find().forEach((optimization) ->
+        @deleteOptimization optimization._id
+    )
 
 Accounts.config
   forbidClientAccountCreation: true
