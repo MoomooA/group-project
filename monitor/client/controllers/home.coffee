@@ -3,7 +3,7 @@ UI.body.rendered = () ->
 
 Template.wrapper.helpers
   color : () ->
-        return Session.get('theme-color') || 'emerald'
+        return Meteor.user().profile.theme || 'emerald'
     
 Template.main.helpers
   menu_settings: () ->

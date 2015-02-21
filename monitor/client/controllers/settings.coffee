@@ -1,6 +1,6 @@
 Template.changeTheme.helpers
     selected : (color) ->
-        if color == Session.get('theme-color') then 'selected' else  '';
+        if color == Meteor.user().profile.theme then 'selected' else  '';
 
 Template.settings.events
   'click .clear-optimizations': (event, template) ->
@@ -19,4 +19,4 @@ Template.settings.events
 
   'change .change-theme': (event, template) ->
       color = event.target.value
-      Session.set('theme-color', color)
+      Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.theme":color}})
