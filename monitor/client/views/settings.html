@@ -1,3 +1,32 @@
 <template name="settings">
-  Settings
+    <div class="settings-wrapper">
+        <div class="settings-title">
+            <h1>Settings</h1>
+        </div>
+        {{> deleteAllOptimizations}}
+        {{> changeTheme}}
+    </div>
+    
+</template>
+
+
+<template name="deleteAllOptimizations">
+        <div class="deleteOptimizations">
+            <hr>
+            <p>Use this option to delete all saved optimizations in one fell swoop! </p>
+            <input type="button" class="clear-optimizations" value="Delete All Optimizations" />
+            <hr>
+        </div>
+</template>
+
+<template name="changeTheme">
+        <div class="changeTheme">
+            <p>Select your preferred theme </p>
+            <select class="change-theme">
+                <option selected value="emerald">Emerald Green</option>
+                <option value="sapphire">Sapphire Blue</option>
+                <option value="ruby">Ruby Red</option>
+            </select>
+            <hr>
+        </div>
 </template>
