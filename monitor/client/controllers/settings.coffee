@@ -1,3 +1,7 @@
+Template.changeTheme.helpers
+    selected : (color) ->
+        if color == Session.get('theme-color') then 'selected' else  '';
+
 Template.settings.events
   'click .clear-optimizations': (event, template) ->
     event.preventDefault()

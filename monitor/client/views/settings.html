@@ -23,10 +23,10 @@
         <div class="changeTheme">
             <p>Select your preferred theme </p>
             <div class="form">
-                <select class="change-theme">
-                    <option selected value="emerald">Emerald Green</option>
-                    <option value="sapphire">Sapphire Blue</option>
-                    <option value="ruby">Ruby Red</option>
+                <select name="color_selector" class="change-theme">
+                    <option {{selected "emerald"}} value="emerald">Emerald Green</option>
+                    <option {{selected "sapphire"}} value="sapphire">Sapphire Blue</option>
+                    <option {{selected "ruby"}} value="ruby">Ruby Red</option>
                 </select>
             </div>
             <hr>
