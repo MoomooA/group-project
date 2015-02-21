@@ -15,14 +15,4 @@ Template.settings.events
 
   'change .change-theme': (event, template) ->
       color = event.target.value
-      switch color || 'emerald'
-          when 'emerald'
-              color = '#37BC9B'
-          when 'sapphire'
-              color = '#0f52ba'
-          when 'ruby'
-              color = '#D10056'
-        
-        $('body').css("color", color)
-#        TODO CHANGE NEW OPTIMIZATION BOX COLOR
-#        $('.addOptimization').css("background-color", color)
+      Session.set('theme-color', color)

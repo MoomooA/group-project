@@ -5,12 +5,19 @@
 </head>
 
 <body>
-  {{#if currentUser}}
-    {{> home}}
-  {{else}}
-    {{> login}}
-  {{/if}}
+  {{> wrapper}}
 </body>
+
+<template name="wrapper">
+   <div class="{{color}}">
+      {{#if currentUser}}
+        {{> home}}
+      {{else}}
+        {{> login}}
+      {{/if}}
+    </div>
+</template>
+
 
 <template name="loading">
   loading...

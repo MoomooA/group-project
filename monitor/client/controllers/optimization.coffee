@@ -72,7 +72,7 @@ drawGraph = () ->
     tooltip:
       shared: true
     series: [
-      {name: 'L / D', data: values, color: '#37BC9B'},
+      {name: 'L / D', data: values, color: 'currentColor'},
       {name: 'c', data: cValues, color: '#FFF'},
       {name: 't', data: tValues, color: '#FFF'},
       {name: 'theta', data: thetaValues, color: '#FFF'}

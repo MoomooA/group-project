@@ -14,7 +14,7 @@
         <div class="deleteOptimizations">
             <hr>
             <p>Use this option to delete all saved optimizations in one fell swoop! </p>
-            <input type="button" class="clear-optimizations" value="Delete All Optimizations" />
+            <input type="button" class="clear-optimizations button" value="Delete All Optimizations" />
             <hr>
         </div>
 </template>
@@ -22,11 +22,13 @@
 <template name="changeTheme">
         <div class="changeTheme">
             <p>Select your preferred theme </p>
-            <select class="change-theme">
-                <option selected value="emerald">Emerald Green</option>
-                <option value="sapphire">Sapphire Blue</option>
-                <option value="ruby">Ruby Red</option>
-            </select>
+            <div class="form">
+                <select class="change-theme">
+                    <option selected value="emerald">Emerald Green</option>
+                    <option value="sapphire">Sapphire Blue</option>
+                    <option value="ruby">Ruby Red</option>
+                </select>
+            </div>
             <hr>
         </div>
 </template>

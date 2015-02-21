@@ -1,6 +1,10 @@
 UI.body.rendered = () ->
   new OutdatedBrowser()
 
+Template.wrapper.helpers
+  color : () ->
+        return Session.get('theme-color') || 'emerald'
+    
 Template.main.helpers
   menu_settings: () ->
     Session.get('page') is 'settings'
