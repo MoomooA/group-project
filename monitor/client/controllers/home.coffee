@@ -3,7 +3,7 @@ UI.body.rendered = () ->
 
 Template.wrapper.helpers
   color : () ->
-        return Meteor.user().profile.theme || 'emerald'
+    if Meteor.user()? and Meteor.user().profile? and Meteor.user().profile.theme? then Meteor.user().profile.theme else 'emerald'
     
 Template.main.helpers
   menu_settings: () ->
