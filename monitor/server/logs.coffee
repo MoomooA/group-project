@@ -12,7 +12,9 @@ Accounts.onLogin (info) ->
       timestamp: new Date()
 
 Accounts.onCreateUser (options, user) ->
-  user.profile['theme'] = 'emerald'
+  user.profile =
+    theme: 'emerald'
+    nbIterations: 10
   Logs.insert
     userId: user._id
     type: "account"

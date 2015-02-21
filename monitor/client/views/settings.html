@@ -5,6 +5,7 @@
         </div>
         {{> deleteAllOptimizations}}
         {{> changeTheme}}
+        {{> changeNbIterations}}
         {{> logout}}
     </div>
     
@@ -38,3 +39,14 @@
             <input type="button" class="logout button" value="Log out!" />
             <hr>
 </template>
+
+<template name="changeNbIterations">
+        <div>
+            <p>Change the number of iterations computed per click </p>
+            <div class="form">
+              <input type="number" min="0" max="1000" class="default-nb-iterations" value="{{nbIterations}}" placeholder="Number of iterations" />
+            </div>
+            <hr>
+        </div>
+</template>
+

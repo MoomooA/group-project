@@ -131,7 +131,7 @@ Template.optimization.events
     e.preventDefault()
     button = utils.initButton t, "iterate"
 
-    nbIterations = 10
+    nbIterations = Meteor.user().profile.nbIterations || 10
 
     Meteor.call('optimize', Session.get('optimization'), nbIterations, (err, result) ->
       button.removeClass('loading')

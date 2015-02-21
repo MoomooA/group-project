@@ -1,6 +1,10 @@
 Template.changeTheme.helpers
-    selected : (color) ->
-        if color == Meteor.user().profile.theme then 'selected' else  '';
+  selected : (color) ->
+    if color == Meteor.user().profile.theme then 'selected' else  ''
+
+Template.changeNbIterations.helpers
+  nbIterations : () ->
+    Meteor.user().profile.nbIterations
 
 Template.settings.events
   'click .clear-optimizations': (event, template) ->
@@ -18,8 +22,12 @@ Template.settings.events
     return false
 
   'change .change-theme': (event, template) ->
-      color = event.target.value
-      Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.theme":color}})
+    color = event.currentTarget.value
+    Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.theme":color}})
 
   'click .logout': (event, template) ->
-      Meteor.logout()
+    Meteor.logout()
+
+  'change .default-nb-iterations': (event, template) ->
+    nb = event.currentTarget.value
+    Meteor.users.update({_id:Meteor.userId()}, {$set:{"profile.nbIterations":nb}})
