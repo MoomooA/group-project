@@ -5,56 +5,60 @@
   height: 200px;
   margin-left: 20px;
   margin-top: 20px;
-  background: @primary-color;
-  color: #FFFFFF;
+  background: currentColor;
   float: left;
   cursor: pointer;
 }
 
 .addOptimization {
   margin-bottom: 20px;
+
+  div {
+    color: #FFFFFF;
+    width:100%;
+    text-align: center;
+
+    &:first-child {
+      font-size: 147px;
+      line-height: 175px;
+    }
+  }
+
 }
 
-.addOptimization > div {
-  width:100%;
-  text-align: center;
-}
+.optimization {
+  div{
+    color: #FFF;
+    &:first-child {
+      text-align: right;
+      position: relative;
+      padding-right: 10px;
+      top: 175px;
+    }
+    &:last-child {
+      text-align: right;
+      width: 90%;
+      margin-right: 5%;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+    }
+    &.del-optimization {
+      opacity: 0;
+      .transition;
+      position: relative;
+      padding-right: 3px;
+      top: -3px;
+      text-align: right;
+    }
+  }
 
-.addOptimization > div:first-child {
-  font-size: 147px;
-  line-height: 175px;
-}
-
-.optimization > div:first-child {
-  text-align: right;
-  position: relative;
-  padding-right: 10px;
-  top: 175px;
-}
-.optimization > div:last-child {
-  padding: 10px;
-  font-size: 30px;
-  text-align: center;
-  max-height: 160px;
-  overflow: hidden;
-  text-overflow: ellipsis;
-  width: 200px;
-  margin-top: -20px;
-}
-
-.optimization > div.del-optimization {
-  opacity: 0;
-  .transition;
-  position: relative;
-  padding-right: 3px;
-  top: -3px;
-  text-align: right;
-}
-
-.optimization:hover > div.del-optimization {
-  opacity: 1;
-}
-
-.optimization:hover > div.del-optimization:hover {
-  color: @error-color;
+  &:hover {
+    .del-optimization {
+      opacity: 1;
+      &:hover {
+        color: @error-color;
+      }
+    }
+  }
 }
