@@ -20,3 +20,6 @@ Template.settings.events
   'change .change-theme': (event, template) ->
       color = event.target.value
       Meteor.users.update({_id:Meteor.user()._id}, {$set:{"profile.theme":color}})
+
+  'click .logout': (event, template) ->
+      Meteor.logout()
