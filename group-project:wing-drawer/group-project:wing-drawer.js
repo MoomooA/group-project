@@ -6,26 +6,34 @@ if (Meteor.isClient) {
         return 5 * t * c * (0.2969 * Math.sqrt(x / c) - 0.1260 * (x / c) - 0.3516 * Math.pow(x / c, 2) + 0.2843 * Math.pow(x / c, 3) - 0.1015 * Math.pow(x / c, 4));
     }
 
+    function rounder(v, p) {
+        var tens = Math.pow(10, p);
+        return (Math.round(v * tens) / tens);
+    }
+
     /*
      * Function to draw the area chart
      */
     function builtArea(config) {
         var y = new Array();
-
+        var yp = new Array();
+        var ang = config.angle * Math.PI / 180;
         for (var x = 0; x < config.c; x += 0.01) {
-            //TODO - tilt it somehow
-            //tried tilts
-            //            val = equation(x, 10, 1) - 5 * x / 10;
-            //            y.push([x,
-            //                val, -val - 10 * x / 10
-            //                ]);
-            //            xp = x * Math.cos(config.angle) - val * Math.sin(config.angle);
-            //            valp = x * Math.sin(config.angle) + val * Math.cos(config.angle);
-
             val = equation(x, config.c, config.t);
-            y.push([x,
-            val, -val]);
+            yp.push([x, val, -val]);
         }
+        var x1, x2, val1, val2;
+        yp.forEach(function (entry) {
+
+            //            x1 = entry[0] * Math.cos(ang) - entry[1] * Math.sin(ang);
+            x1 = entry[0];
+            val1 = x1 * Math.sin(ang) + entry[1] * Math.cos(ang);
+
+            //            x2 = entry[0] * Math.cos(ang) - entry[2] * Math.sin(ang);
+            x2 = entry[0];
+            val2 = x2 * Math.sin(ang) + entry[2] * Math.cos(ang);
+            y.push([entry[0], val1, val2]);
+        });
 
         $('#container-area').highcharts({
 
@@ -67,7 +75,11 @@ if (Meteor.isClient) {
             },
 
             tooltip: {
-                pointFormat: '{point.y:,.3f} {point.x:,.3f}'
+                formatter: function () {
+                        //                        console.log("my object: %o", this);
+                        return 'x: ' + rounder(this.point.low, 3) + '<br\>y: [' + rounder(this.point.high, 3) + ' ' + rounder(this.point.x, 3) + ']';
+                    }
+                    //                pointFormat: '{point.low:,.3f} {point.high:,.3f}'
             },
 
             plotOptions: {
@@ -85,10 +97,12 @@ if (Meteor.isClient) {
                     }
                 }
             },
-            series: [{
-                data: y,
-                showInLegend: false
-        }]
+            series: [
+                {
+                    data: y,
+                    showInLegend: false
+                }
+            ]
         });
     }
 
@@ -96,8 +110,8 @@ if (Meteor.isClient) {
      * Call the function to built the chart when the template is rendered
      */
     Template.groupProjectWingDrawer.rendered = function () {
-        var _angle = 45;
-        var _c = 15;
+        var _angle = 10;
+        var _c = 10;
         var _t = 1;
         builtArea({
             c: _c,
