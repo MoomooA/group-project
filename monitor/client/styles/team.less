@@ -4,6 +4,27 @@
   border-top: 1px solid @darkLightgray;
   margin-top: 2em;
   padding-top: 2em;
+
+  h2 {
+    text-align: center;
+    .joke {
+      span {
+        overflow: hidden;
+        width: 0;
+        display: inline-block;
+        white-space: nowrap;
+        .transition;
+      }
+
+      &:hover {
+        text-decoration: line-through;
+        span {
+          text-decoration: none;
+          width: 200px;
+        }
+      }
+    }
+  }
   .member {
     width: 25%;
     float: left;
@@ -25,7 +46,6 @@
     }
 
     h2 {
-      text-align: center;
       font-size: 1em;
       margin-top: 13vw;
     }
