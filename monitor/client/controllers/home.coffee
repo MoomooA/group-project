@@ -16,6 +16,8 @@ Template.main.helpers
     Session.get('page') is 'help'
   menu_logs: () ->
     Session.get('page') is 'logs'
+  menu_team: () ->
+    Session.get('page') is 'team'
 
 Template.menu.events
   'click #menu-settings': (event, template) ->
@@ -30,3 +32,6 @@ Template.menu.events
   'click #menu-logs': (event, template) ->
     Session.set('optimization', null)
     Session.set('page', 'logs')
+  'click #menu-team': (event, template) ->
+    Session.set('optimization', null)
+    Session.set('page', 'team')

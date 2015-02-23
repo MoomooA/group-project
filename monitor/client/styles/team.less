@@ -1,0 +1,68 @@
+@import "common/variables.less";
+
+.team {
+  border-top: 1px solid @darkLightgray;
+  margin-top: 2em;
+  padding-top: 2em;
+  .member {
+    width: 25%;
+    float: left;
+
+    img {
+      width: ~"calc((100% - 100px)/8)";
+      margin-left: ~"calc((100% - 100px)/16)";
+      border-radius: 50%;
+      position: absolute;
+
+      &.color {
+        opacity: 0;
+        .transition;
+
+        &:hover {
+          opacity: 1;
+        }
+      }
+    }
+
+    h2 {
+      text-align: center;
+      font-size: 1em;
+      margin-top: 13vw;
+    }
+
+    .social {
+      margin-left: ~"calc(50% - 90px)";
+      a {
+        float: left;
+        width: 40px;
+        height: 40px;
+        margin: 0 10px;
+        span {
+          display: inline-block;
+          width: 40px;
+          height: 40px;
+          background: url(/images/sprite_social.png) 0 0 no-repeat;
+        }
+
+        &.facebook span {
+          background-position:0 0;
+          &:hover {
+            background-position:-40px 0;
+          }
+        }
+        &.twitter span {
+          background-position:-80px 0;
+          &:hover {
+            background-position:-120px 0;
+          }
+        }
+        &.linkedin span {
+          background-position:-240px 0;
+          &:hover {
+            background-position:-280px 0;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,19 @@
+<template name="team">
+  <div class="about">
+    Group project for the Cranfield SETC msc 2014-2015.
+  </div>
+  <div class="team">
+    {{#each members}}
+    <div class="member">
+      <img src="{{imageBlack}}">
+      <img src="{{image}}" class="color">
+      <h2>{{name}}</h2>
+      <div class="social">
+        <a href="{{facebook}}" class="facebook" target="_blank"><span></span></a>
+        <a href="{{twitter}}" class="twitter" target="_blank"><span></span></a>
+        <a href="{{linkedin}}" class="linkedin" target="_blank"><span></span></a>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+</template>

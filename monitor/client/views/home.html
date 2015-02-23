@@ -6,7 +6,9 @@
 
 <template name='main'>
   <div class='main'>
-  {{#if menu_optimization}}
+  {{#if menu_team}}
+    {{> team}}
+  {{else}}{{#if menu_optimization}}
     {{> optimization}}
   {{else}}{{#if menu_settings}}
     {{> settings}}
@@ -16,7 +18,7 @@
     {{> logs}}
   {{else}}
     {{> optimizations}}
-  {{/if}}{{/if}}{{/if}}{{/if}}
+  {{/if}}{{/if}}{{/if}}{{/if}}{{/if}}
   </div>
 </template>
 
