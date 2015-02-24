@@ -3,7 +3,7 @@ Template.team.helpers
     [
       {
         name: 'Jakub Baron'
-        imageBlack:  "images/jakub_black.jpg"
+        imageBlack:  "images/jakub_black.jpeg"
         image:  "images/jakub.jpg"
         facebook: ""
         twitter: ""
