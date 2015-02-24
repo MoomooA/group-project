@@ -11,9 +11,7 @@
   js: pre[0].toUpperCase() + pre.substr(1)
 )()
 
-@utils.initButton = (t, buttonId) ->
-  button = $("##{buttonId}")
-  button.addClass('loading')
+@utils.initFormErrors = (t) ->
   if t.find('.error-form')?
     for el in t.find('.error-form')
       do (el) ->

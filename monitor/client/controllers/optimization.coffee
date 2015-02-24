@@ -87,7 +87,8 @@ Template.graph.rendered =  () ->
 Template.new_optimization.events
   'submit .form': (e, t) ->
     e.preventDefault()
-    button = utils.initButton t, "button"
+    button = new ProgressButton "button"
+    utils.initFormErrors t
 
     tolerance = t.find('#tolerance').value.trim()
     step = t.find('#step').value.trim()
@@ -105,20 +106,12 @@ Template.new_optimization.events
       max: 0
     , (err, optimizationId) ->
       if err?
-        button.removeClass('loading')
-        button.addClass('error')
-        Meteor.setTimeout(
-          () -> button.removeClass('error' )
-        , 1200 )
+        button.error()
         console.log(err)
         return
       Meteor.call('launchOptimization', optimizationId, c, _t, theta, (err, result) ->
-        button.removeClass('loading')
         if err?
-          button.addClass('error')
-          Meteor.setTimeout(
-            () -> button.removeClass( 'error' )
-          , 1200 )
+          button.error()
           console.log(err)
           return
         Session.set('optimization', optimizationId)
@@ -134,12 +127,8 @@ Template.optimization.events
     nbIterations = Meteor.user().profile.nbIterations || 10
 
     Meteor.call('optimize', Session.get('optimization'), nbIterations, (err, result) ->
-      button.removeClass('loading')
       if err?
-        button.addClass( 'error')
-        setTimeout(
-          () -> button.removeClass( 'error' )
-        , 1200 )
+        button.error()
         console.log(err)
         return
     )
