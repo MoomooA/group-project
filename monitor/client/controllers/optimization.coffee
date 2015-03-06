@@ -10,19 +10,61 @@ Template.optimization.helpers
     if optimization? and optimization.finished
       Iterations.findOne({$and: [{optimizationId: optimization._id}, {value: optimization.max}]})
     else
-      Iterations.findOne({optimizationId: optimization._id}, {sort:[["counter", "desc"]]})
+      Iterations.findOne({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]})
 
-graph = null
+wingEquation = (x, c, t) ->
+  5 * t * c * (0.2969 * Math.sqrt(x / c) - 0.1260 * (x / c) - 0.3516 * Math.pow(x / c, 2) + 0.2843 * Math.pow(x / c, 3) - 0.1015 * Math.pow(x / c, 4))
 
-### TODO update canvas
-Tracker.autorun () ->
+drawDraw = () ->
   optimization = Optimizations.findOne(Session.get('optimization'))
-  iteration = null
   if optimization? and optimization.finished
     iteration = Iterations.findOne({$and: [{optimizationId: optimization._id}, {value: optimization.max}]})
   else
-    iteration = Iterations.findOne({optimizationId: optimization._id}, {$sort:[["counter", "desc"]]})
-###
+    iteration = Iterations.findOne({optimizationId: Session.get('optimization')}, {sort:[["counter", "desc"]]})
+
+  values = []
+  if iteration? and iteration.parameters? and iteration.parameters.length is 3
+    x = 0
+    while x < iteration.parameters[0]
+      y = wingEquation(x, iteration.parameters[0], iteration.parameters[1])
+      values.push
+        x: x
+        y: parseFloat(y)
+      values.unshift
+        x: x
+        y: -y
+      x += 0.01
+
+    values = values.map (value) ->
+      oldX = value.x - iteration.parameters[0]/2
+      return {
+        x: (oldX * Math.cos(iteration.parameters[2]) + value.y * Math.sin(iteration.parameters[2])) + iteration.parameters[0]/2
+        y: value.y * Math.cos(iteration.parameters[2]) - oldX * Math.sin(iteration.parameters[2])
+      }
+
+    $('#canvas-draw').highcharts
+      chart:
+        plotBackgroundColor: null,
+        plotBorderWidth: null,
+        plotShadow: false
+      title:
+        text: null
+      yAxis:
+        title: ''
+      credits:
+        enabled: false
+      legend:
+        enabled: false
+      tooltip:
+        shared: true
+      series: [
+        {name: 'wing', data: values, color: 'currentColor'}
+      ]
+
+Template.draw.rendered =  () ->
+  $("#canvas-draw").height($(window).height() - $("#canvas-draw").offset().top)
+  @autorun () ->
+    drawDraw()
 
 drawGraph = () ->
   iterations = Iterations.find({optimizationId: Session.get('optimization')}, {sort:[["counter", "asc"]]})
@@ -83,7 +125,6 @@ Template.graph.rendered =  () ->
   @autorun () ->
     drawGraph()
 
-
 Template.new_optimization.events
   'submit .form': (e, t) ->
     e.preventDefault()
@@ -122,15 +163,17 @@ Template.new_optimization.events
 Template.optimization.events
   'click #iterate': (e, t) ->
     e.preventDefault()
-    button = utils.initButton t, "iterate"
+    button = new ProgressButton "iterate"
+    utils.initFormErrors t
 
     nbIterations = Meteor.user().profile.nbIterations || 10
 
     Meteor.call('optimize', Session.get('optimization'), nbIterations, (err, result) ->
       if err?
-        button.error()
         console.log(err)
+        button.error()
         return
+      button.notLoading()
     )
 
     return false

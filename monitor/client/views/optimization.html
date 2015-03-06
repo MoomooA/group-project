@@ -29,13 +29,16 @@
         </div>
       </div>
       <div class="row">
-        <div class="draw"><canvas id="canvas-draw"></canvas></div>
+        {{> draw}}
         {{> graph}}
       </div>
     </div>
   {{/if}}
 </template>
 
+<template name="draw">
+  <div class="draw" id="canvas-draw"></div>
+</template>
 <template name="graph">
   <div class="graph" id="canvas-graph"></div>
 </template>
