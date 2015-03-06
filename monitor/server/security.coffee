@@ -123,15 +123,17 @@ Meteor.methods
       parameters = iterations[0].parameters
       c = parameters.shift() # we don't tweak the c
       optimizer = new Optimizer(parameters, optimization.tolerance, optimization.defaultStep)
+      currentValue = iterations[0].L / iterations[0].D
     else
       parameters0 = iterations[0].parameters
       c = parameters0.shift() # we don't tweak the c
       parameters1 = iterations[1].parameters
       parameters1.shift() # we don't tweak the c
       optimizer = new Optimizer(parameters0, optimization.tolerance, optimization.defaultStep, parameters1, iterations[0].variation, iterations[1].variation, iterations[0].step, iterations[1].L / iterations[1].D)
+      currentValue = iterations[1].L / iterations[1].D
 
     startingValue = optimization.max
-    currentValue = iterations[0].L / iterations[0].D
+    currentMaxValue = optimization.max
 
     i = 0
     while i < nbIterations
@@ -140,10 +142,12 @@ Meteor.methods
       L = liftSolver.reducedSolve(currentParameters[0], currentParameters[2])
       D = dragSolver.reducedSolve(currentParameters[0], currentParameters[1], currentParameters[2])
 
-      if L / D > currentValue
+      if L / D > currentMaxValue
         Optimizations.update(optimizationId, {$set: {updatedAt: new Date(), max: L / D}})
+        currentMaxValue = L / D
 
       currentValue = L / D
+
       Iterations.insert
         D: D
         L: L
@@ -163,7 +167,7 @@ Meteor.methods
       message: "Iterate #{nbIterations} times the optimization #{optimizationId}"
       timestamp: new Date()
 
-    if Optimizations.findOne(optimizationId).max is startingValue
+    if currentMaxValue is startingValue
       Logs.insert
         userId: @userId
         type: "finished"
@@ -172,11 +176,6 @@ Meteor.methods
       Optimizations.update(optimizationId, {$set: {finished: true}})
 
     return "finished"
-
-deleteAllOptimizations: ->
-    Optimizations.find().forEach((optimization) ->
-        @deleteOptimization optimization._id
-    )
 
 Accounts.config
   forbidClientAccountCreation: true
