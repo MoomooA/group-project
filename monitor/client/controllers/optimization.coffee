@@ -35,15 +35,28 @@ drawDraw = () ->
         y: -y
       x += 0.01
 
+    values.push
+      x: iteration.parameters[0]
+      y: 0
+    values.unshift
+      x: iteration.parameters[0]
+      y: 0
+
     values = values.map (value) ->
       oldX = value.x - iteration.parameters[0]/2
       return {
         x: (oldX * Math.cos(iteration.parameters[2]) + value.y * Math.sin(iteration.parameters[2])) + iteration.parameters[0]/2
         y: value.y * Math.cos(iteration.parameters[2]) - oldX * Math.sin(iteration.parameters[2])
+        marker:
+          enabled: false
+          states:
+            hover:
+              enabled: false
       }
 
     $('#canvas-draw').highcharts
       chart:
+        type: 'area'
         plotBackgroundColor: null,
         plotBorderWidth: null,
         plotShadow: false
@@ -56,7 +69,7 @@ drawDraw = () ->
       legend:
         enabled: false
       tooltip:
-        shared: true
+        enabled: false
       series: [
         {name: 'wing', data: values, color: 'currentColor'}
       ]
