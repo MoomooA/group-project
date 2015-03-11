@@ -36,7 +36,7 @@ logging@1.0.6
 maazalik:highcharts@0.2.3
 matdutour:outdated-browser@0.1.1
 matdutour:popup-confirm@0.1.23
-matdutour:progress-button@0.1.10
+matdutour:progress-button@0.1.11
 meteor@1.1.4
 meteor-platform@1.2.1
 mike:mocha@0.5.2

@@ -12,7 +12,6 @@ Template.login.events
         if err.reason is "User not found" or err.reason is "Match failed"
           Meteor.call('checkAstral', username, password, (err, result) ->
             if err?
-              button.removeClass("loading")
               button.error()
               console.log('err-on-astral', err)
               utils.showErrorForm t.find('#error-serveur')
