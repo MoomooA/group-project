@@ -165,6 +165,7 @@ Template.new_optimization.events
         return
       Meteor.call('launchOptimization', optimizationId, c, _t, theta, (err, result) ->
         if err?
+          Optimizations.remove optimizationId
           button.error()
           console.log(err)
           return
