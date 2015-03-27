@@ -9,7 +9,7 @@ if (!(typeof MochaWeb === 'undefined')){
         });
       }
       it("should compute the lift", function(){
-        solver.reducedSolve(1, 1, 1).should.equal(0.9716854924039483);
+        solver.reducedSolve(1, 1, 1).should.equal(0.5662360870822405);
         solver.reducedSolve(1, 1, 1).should.equal(solver.solve(1, 1, 1, 1, 1, 1, 1));
       });
     });
