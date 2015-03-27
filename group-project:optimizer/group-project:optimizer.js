@@ -54,7 +54,7 @@ Optimizer = (function () {
 
     if (parameterTotweakIndex === this.tweakedParameter) {
       step = this.step;
-      if (currentValue < this.previousValue) { // we need to go back
+      if (currentValue <= this.previousValue) { // we need to go back
         variation = -this.currentVariation;
         if (variation == this.previousVariation) { // if we are oscillating
           step = this.step / 2;
@@ -78,6 +78,16 @@ Optimizer = (function () {
     // TODO find a way remove it from here
     if (this.tweakedParameter === 0 && this.currentParameters[this.tweakedParameter] < 0.01) {
       this.currentParameters[this.tweakedParameter] = 0.01;
+    }
+    // if we are tweaking the theta, make sure that it's not above PI/2, it doesn't make sense
+    // TODO find a way remove it from here
+    else if (this.tweakedParameter === 1 && this.currentParameters[this.tweakedParameter] > Math.PI/2) {
+      this.currentParameters[this.tweakedParameter] = Math.PI/2;
+    }
+    // if we are tweaking the theta, make sure that it's not under 0, it doesn't make sense
+    // TODO find a way remove it from here
+    else if (this.tweakedParameter === 1 && this.currentParameters[this.tweakedParameter] < 0) {
+      this.currentParameters[this.tweakedParameter] = 0;
     }
 
     return {
