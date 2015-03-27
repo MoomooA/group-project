@@ -144,11 +144,16 @@ Template.new_optimization.events
     button = new ProgressButton "button"
     utils.initFormErrors t
 
-    tolerance = t.find('#tolerance').value.trim()
-    step = t.find('#step').value.trim()
-    _t = t.find('#t').value.trim()
-    c = t.find('#c').value.trim()
-    theta = t.find('#theta').value.trim()
+    tolerance = parseFloat t.find('#tolerance').value.trim()
+    step = parseFloat t.find('#step').value.trim()
+    _t = parseFloat t.find('#t').value.trim()
+    c = parseFloat t.find('#c').value.trim()
+    theta = parseFloat t.find('#theta').value.trim()
+
+    if isNaN(tolerance) or isNaN(step) or isNaN(_t) or isNaN(c) or isNaN(theta)
+      button.error()
+      console.log("wrong format")
+      return
 
     Optimizations.insert(
       userId: Meteor.userId()
@@ -165,7 +170,6 @@ Template.new_optimization.events
         return
       Meteor.call('launchOptimization', optimizationId, c, _t, theta, (err, result) ->
         if err?
-          Optimizations.remove optimizationId
           button.error()
           console.log(err)
           return

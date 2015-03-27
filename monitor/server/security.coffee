@@ -26,14 +26,14 @@ Meteor.methods
         type: "error"
         message: "Unsuccessful attemp to delete the optimization #{optimizationId} : Not found"
         timestamp: new Date()
-      throw new Meteor.Error("no-optimization", "No optimization found");
+      throw new Meteor.Error("no-optimization", "No optimization found")
     else if !optimizationRestricted?
       Logs.insert
         userId: optimization.userId
         type: "security"
         message: "#{@connection.clientAddress} tried to delete your optimization #{optimizationId}"
         timestamp: new Date()
-      throw new Meteor.Error("no-right", "You do not have the right to delete this.");
+      throw new Meteor.Error("no-right", "You do not have the right to delete this.")
 
     Logs.insert
       userId: @userId
@@ -49,6 +49,14 @@ Meteor.methods
     )
 
   launchOptimization: (optimizationId, c, t, theta) ->
+    if isNaN(t) or isNaN(c) or isNaN(theta)
+      Logs.insert
+        userId: @userId
+        type: "error"
+        message: "Unsuccessful attemp to create the optimization #{optimizationId}, wrong format of parameters"
+        timestamp: new Date()
+      throw new Meteor.Error("wrong-format", "Wrong format of parameters")
+
     optimization = Optimizations.findOne(optimizationId)
     optimizationRestricted = Optimizations.findOne({$and: [_id: optimizationId, userId: @userId]})
     if !optimization?
@@ -57,14 +65,14 @@ Meteor.methods
         type: "error"
         message: "Unsuccessful attemp to create the optimization #{optimizationId}"
         timestamp: new Date()
-      throw new Meteor.Error("no-optimization", "No optimization found");
+      throw new Meteor.Error("no-optimization", "No optimization found")
     else if !optimizationRestricted?
       Logs.insert
         userId: optimization.userId
         type: "security"
         message: "#{@connection.clientAddress} tried to create an optimization #{optimizationId} for you"
         timestamp: new Date()
-      throw new Meteor.Error("no-right", "You do not have the right to delete this.");
+      throw new Meteor.Error("no-right", "You do not have the right to delete this.")
 
     #TODO find drag coefficient
     D = (new DragSolver(1)).reducedSolve(c, t, theta)
@@ -104,14 +112,14 @@ Meteor.methods
         type: "error"
         message: "Unsuccessful attemp to create the optimization #{optimizationId}"
         timestamp: new Date()
-      throw new Meteor.Error("no-optimization", "No optimization found");
+      throw new Meteor.Error("no-optimization", "No optimization found")
     else if !optimizationRestricted?
       Logs.insert
         userId: optimization.userId
         type: "security"
         message: "#{@connection.clientAddress} tried to create an optimization #{optimizationId} for you"
         timestamp: new Date()
-      throw new Meteor.Error("no-right", "You do not have the right to delete this.");
+      throw new Meteor.Error("no-right", "You do not have the right to delete this.")
     else if !iterations.length? or iterations.length is 0
       Logs.insert
         userId: @userId
